@@ -2,12 +2,29 @@ package hiiragi283.material
 
 import hiiragi283.api.part.getParts
 import net.minecraftforge.api.distmarker.Dist
+import net.minecraftforge.client.event.ColorHandlerEvent
+import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.event.entity.player.ItemTooltipEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = RagiMaterials.MOD_ID, value = [Dist.CLIENT])
 object RMClientEvents {
+
+    @SubscribeEvent
+    fun registerBlockColor(event: ColorHandlerEvent.Block) {
+
+    }
+
+    @SubscribeEvent
+    fun registerItemColor(event: ColorHandlerEvent.Item) {
+
+    }
+
+    @SubscribeEvent
+    fun registerModel(event: ModelRegistryEvent) {
+
+    }
 
     @SubscribeEvent
     fun onTooltip(event: ItemTooltipEvent) {

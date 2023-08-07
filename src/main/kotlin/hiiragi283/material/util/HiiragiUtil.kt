@@ -260,7 +260,7 @@ fun playSoundHypixel(tile: TileEntity) {
 //    TileEntity    //
 
 @Suppress("UNCHECKED_CAST")
-fun <T : TileEntity> getBlockEntity(world: IBlockReader?, pos: BlockPos?): T? =
+fun <T : TileEntity> getTile(world: IBlockReader?, pos: BlockPos?): T? =
     pos?.let { world?.getBlockEntity(it) } as? T
 
 //    Misc    //
