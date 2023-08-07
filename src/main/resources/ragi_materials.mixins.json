@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "hiiragi283.material.ragi_materials.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "forge_1.16.5.refmap.json",
+  "mixins": [],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
