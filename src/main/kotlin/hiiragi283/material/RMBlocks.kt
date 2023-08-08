@@ -5,8 +5,12 @@ import net.minecraftforge.registries.IForgeRegistry
 
 object RMBlocks {
 
-    fun register(registry: IForgeRegistry<Block>) {}
+    fun initResourcePack() {
 
-    fun initResourcePack() {}
+    }
+
+    fun register(registry: IForgeRegistry<Block>) {
+
+    }
 
 }

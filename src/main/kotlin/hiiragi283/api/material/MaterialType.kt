@@ -3,44 +3,42 @@ package hiiragi283.api.material
 object MaterialType {
 
     @JvmField
-    val INTERNAL: Set<String> = setOf("bottle", "wildcard")
+    val INTERNAL: Set<String> = setOf("bottles", "wildcard")
 
     @JvmField
     val SOLID: Set<String> = setOf(
-        "dust",
-        "dust_tiny"
+        "dusts",
+        "tiny_dusts"
     )
 
     @JvmField
     val GEM_4x: Set<String> = SOLID.toMutableSet().also {
-        it.add("gem")
+        it.add("gems")
     }
 
     @JvmField
     val GEM_4xADVANCED: Set<String> = SOLID.toMutableSet().also {
-        it.add("plate")
-        it.add("rod")
+        it.add("plates")
+        it.add("rods")
     }
 
     @JvmField
     val GEM_9x: Set<String> = GEM_4x.toMutableSet().also {
-        it.add("block_gem")
-        it.add("gem")
+        it.add("gems")
     }
 
     @JvmField
     val GEM_9xADVANCED: Set<String> = GEM_9x.toMutableSet().also {
-        it.add("plate")
-        it.add("rod")
+        it.add("plates")
+        it.add("rods")
     }
 
     @JvmField
     val METAL_COMMON: Set<String> = SOLID.toMutableSet().also {
         it.addAll(
             setOf(
-                "block_metal",
-                "ingot",
-                "nugget"
+                "ingots",
+                "nuggets"
             )
         )
     }
@@ -49,9 +47,9 @@ object MaterialType {
     val METAL_ADVANCED: Set<String> = METAL_COMMON.toMutableSet().also {
         it.addAll(
             setOf(
-                "gear",
-                "plate",
-                "rod"
+                "gears",
+                "plates",
+                "rods"
             )
         )
     }
@@ -60,10 +58,10 @@ object MaterialType {
     val WOOD: Set<String> = SOLID.toMutableSet().also {
         it.addAll(
             setOf(
-                "gear",
-                "log",
-                "plank",
-                "plate"
+                "gears",
+                "logs",
+                "planks",
+                "plates"
             )
         )
     }

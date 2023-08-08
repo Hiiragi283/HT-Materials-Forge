@@ -40,7 +40,7 @@ internal interface HiiragiEntry<T : IForgeRegistryEntry<T>> : IItemProvider {
 
 //    Block    //
 
-abstract class HiiragiBlock(id: String, settings: Properties) : Block(settings), HiiragiEntry.BLOCK {
+abstract class HiiragiBlock(id: String, properties: Properties) : Block(properties), HiiragiEntry.BLOCK {
 
     init {
         setRegistryName(RagiMaterials.MOD_ID, id)
@@ -50,8 +50,8 @@ abstract class HiiragiBlock(id: String, settings: Properties) : Block(settings),
 
 //    Item    //
 
-open class HiiragiBlockItem(block: Block, settings: Properties = Properties()) :
-    BlockItem(block, settings), HiiragiEntry.ITEM {
+open class HiiragiBlockItem(block: Block, properties: Properties = Properties()) :
+    BlockItem(block, properties), HiiragiEntry.ITEM {
 
     init {
         registryName = block.registryName
@@ -62,7 +62,7 @@ open class HiiragiBlockItem(block: Block, settings: Properties = Properties()) :
 
 }
 
-abstract class HiiragiItem(id: String, settings: Properties = Properties()) : Item(settings), HiiragiEntry.ITEM {
+abstract class HiiragiItem(id: String, properties: Properties = Properties()) : Item(properties), HiiragiEntry.ITEM {
 
     init {
         setRegistryName(RagiMaterials.MOD_ID, id)

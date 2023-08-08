@@ -8,8 +8,8 @@ import hiiragi283.api.shape.ShapeRegistry
 object RMInitializer {
 
     fun initShapes() {
-        ShapeRegistry.registerShape(HiiragiShapes.DUST)
-        ShapeRegistry.registerShape(HiiragiShapes.DUST_TINY)
+        ShapeRegistry.registerShape(HiiragiShapes.DUSTS)
+        ShapeRegistry.registerShape(HiiragiShapes.TINY_DUSTS)
         ShapeRegistry.registerShape(HiiragiShapes.GEAR)
         ShapeRegistry.registerShape(HiiragiShapes.GEM)
         ShapeRegistry.registerShape(HiiragiShapes.INGOT)

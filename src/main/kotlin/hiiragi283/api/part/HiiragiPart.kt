@@ -52,7 +52,7 @@ data class HiiragiPart(val shape: HiiragiShape, val material: HiiragiMaterial) :
     override fun toString(): String = "${shape.name}:${material.name}"
 
     fun appendTooltip(tooltip: MutableList<ITextComponent>) {
-        if (isEmpty()) return
+        if (material.isEmpty()) return
         tooltip.add(StringTextComponent("§e=== Property ==="))
         tooltip.add(TranslationTextComponent("tips.ragi_materials.property.name", "§b${getName()}"))
         if (material.hasFormula())
@@ -87,6 +87,9 @@ data class HiiragiPart(val shape: HiiragiShape, val material: HiiragiMaterial) :
 
     fun getText(): TranslationTextComponent =
         TranslationTextComponent(shape.getTranslationKey(), material.getTranslatedName())
+
+    fun replace(shape: HiiragiShape = this.shape, material: HiiragiMaterial = this.material): HiiragiPart =
+        HiiragiPart(shape, material)
 
     //    ResourceLocation    //
 

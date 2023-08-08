@@ -1,6 +1,10 @@
 package hiiragi283.api.material
 
 import hiiragi283.api.item.HiiragiToolMaterial
+import hiiragi283.api.item.MaterialItem
+import hiiragi283.api.item.createMaterialItem
+import hiiragi283.api.part.HiiragiPart
+import hiiragi283.api.shape.ShapeRegistry
 import hiiragi283.material.RagiMaterials
 import hiiragi283.material.util.forgeRL
 import kotlinx.serialization.Serializable
@@ -66,6 +70,11 @@ data class HiiragiMaterial internal constructor(
     override fun toString(): String = "material:$name"
 
     fun addBracket(): HiiragiMaterial = copy(formula = "($formula)")
+
+    fun createItems(): List<MaterialItem> = ShapeRegistry.getShapes()
+        .filter { it.isValid(this) }
+        .map { HiiragiPart(it, this) }
+        .map { createMaterialItem(it) }
 
     fun getForgeTag(): ResourceLocation = forgeRL(name)
 

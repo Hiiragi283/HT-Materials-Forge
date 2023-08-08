@@ -16,7 +16,7 @@ fun shapeOf(
     name: String,
     scale: Double,
     blockSettings: AbstractBlock.Properties = AbstractBlock.Properties.copy(Blocks.AIR),
-    model: Function<MaterialItemProvider, ModelJsonBuilder> = Function { itemModelLayered(hiiragiRL("item/ingot")) },
+    model: Function<MaterialItemProvider, ModelJsonBuilder> = Function { itemModelLayered(ResourceLocation("item/iron_ingot")) },
     recipes: BiConsumer<RuntimeResourcePack, MaterialItemProvider> = BiConsumer { pack, item -> },
     state: ResourceLocation = hiiragiRL("block/block_metal")
 ): HiiragiShape = object : HiiragiShape(name, scale) {

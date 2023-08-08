@@ -1,7 +1,7 @@
 package hiiragi283.api.block
 
+import hiiragi283.api.ColoredItemProvider
 import hiiragi283.api.HiiragiBlock
-import hiiragi283.api.ItemColorProvider
 import hiiragi283.api.MaterialItemProvider
 import hiiragi283.api.part.HiiragiPart
 import hiiragi283.material.RagiMaterials
@@ -17,11 +17,11 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.IFormattableTextComponent
 import net.minecraft.world.IBlockDisplayReader
 
-fun createMaterialBlock(part: HiiragiPart, settings: Properties = part.shape.getBlockSettings()): HiiragiBlock {
+fun createMaterialBlock(part: HiiragiPart, settings: Properties = part.shape.getBlockSettings()): MaterialBlock {
 
     val (shape, material) = part
 
-    return object : MaterialBlock(part, settings) {
+    return object : MaterialBlock(part.getId(), settings) {
 
         override fun asPart(): HiiragiPart = part
 
@@ -54,7 +54,5 @@ fun createMaterialBlock(part: HiiragiPart, settings: Properties = part.shape.get
 
 }
 
-abstract class MaterialBlock(
-    val part: HiiragiPart,
-    settings: Properties = part.shape.getBlockSettings()
-) : HiiragiBlock(part.getId(), settings), IBlockColor, ItemColorProvider, MaterialItemProvider
+abstract class MaterialBlock(id: String, properties: Properties) : HiiragiBlock(id, properties), IBlockColor,
+    ColoredItemProvider, MaterialItemProvider

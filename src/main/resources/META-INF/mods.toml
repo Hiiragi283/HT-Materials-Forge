@@ -25,7 +25,7 @@ displayName="${mod_name}" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="ragi_materials.png" #optional
+logoFile = "assets/ragi_materials/textures/logo.png" #optional
 # A text field displayed in the mod UI
 #credits="Thanks for this example mod goes to Java" #optional
 # A text field displayed in the mod UI
@@ -49,7 +49,12 @@ description='''${mod_description}'''
 [[dependencies.${mod_id}]]
    modId="minecraft"
    mandatory=true
-   # This version range declares a minimum of the current minecraft version up to but not including the next major version
    versionRange="${minecraft_version_range}"
    ordering="NONE"
    side="BOTH"
+[[dependencies.${mod_id}]]
+   modId = "brrp_v1"
+   mandatory = true
+   versionRange = "[1.0.0,)"
+   ordering = "NONE"
+   side = "BOTH"

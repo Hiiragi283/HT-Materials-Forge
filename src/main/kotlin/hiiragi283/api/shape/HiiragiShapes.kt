@@ -1,8 +1,13 @@
 package hiiragi283.api.shape
 
+import hiiragi283.material.util.append
 import hiiragi283.material.util.hiiragiRL
+import hiiragi283.material.util.itemModelLayered
 import net.minecraft.block.AbstractBlock
 import net.minecraft.block.Blocks
+import net.minecraft.data.ShapedRecipeBuilder
+import net.minecraft.data.ShapelessRecipeBuilder
+import net.minecraft.util.ResourceLocation
 import pers.solid.brrp.v1.model.ModelJsonBuilder
 
 object HiiragiShapes {
@@ -12,6 +17,15 @@ object HiiragiShapes {
     private val gemFake = shapeOf("gems", 1.0)
 
     //    Blocks   //
+
+    @JvmField
+    val STORAGE_BLOCKS = shapeOf(
+        "storage_blocks",
+        9.0,
+        blockSettings = AbstractBlock.Properties.copy(Blocks.IRON_BLOCK),
+        model = { ModelJsonBuilder().parent(hiiragiRL("block/block_metal")) },
+        state = hiiragiRL("block/block_metal")
+    )
 
     @JvmField
     val BLOCK_METAL = shapeOf(
@@ -61,131 +75,108 @@ object HiiragiShapes {
     //    Items    //
 
     @JvmField
-    val DUST = shapeOf(
+    val DUSTS = shapeOf(
         "dusts",
         1.0,
-        /*model = ModelUtil.createSimple(hiiragiRL("item/dust")),
-        recipes = {
-            mapOf(
-                it.asPart().getId().append("_shaped") to ShapedRecipeJsonBuilder.create(it)
-                    .get3x3('A')
-                    .input('A', it.asPart().setShape(DUST_TINY).getTagKey(Registry.ITEM_KEY))
-                    .criterionFromMaterial(DUST_TINY, it.asPart().material)
+        model = { itemModelLayered(hiiragiRL("item/dusts")) },
+        recipes = { pack, provider ->
+            pack.addRecipeAndAdvancement(
+                hiiragiRL(provider.asPart().getId()).append("_shaped"),
+                ShapedRecipeBuilder.shaped(provider)
+                    .pattern("AAA")
+                    .pattern("AAA")
+                    .pattern("AAA")
+                    .define('A', provider.asPart().replace(TINY_DUSTS).getItemTag())
+                ::save
             )
-        }*/
+        }
     )
 
     @JvmField
-    val DUST_TINY = shapeOf(
-        "dust_tiny",
+    val TINY_DUSTS = shapeOf(
+        "tiny_dusts",
         0.1,
-        /*model = ModelUtil.createSimple(hiiragiRL("item/dust_tiny")),
-        recipes = {
-            mapOf(
-                it.asPart().getId().append("_shapeless") to ShapelessRecipeJsonBuilder.create(it, 9)
-                    .input(it.asPart().setShape(dustFake).getTagKey(Registry.ITEM_KEY))
-                    .criterionFromMaterial(dustFake, it.asPart().material)
+        model = { itemModelLayered(hiiragiRL("item/tiny_dusts")) },
+        recipes = { pack, provider ->
+            pack.addRecipeAndAdvancement(
+                hiiragiRL(provider.asPart().getId()).append("_shapeless"),
+                ShapelessRecipeBuilder.shapeless(provider)
+                    .requires(provider.asPart().replace(dustFake).getItemTag())
+                ::save
             )
-        }*/
+        }
     )
 
     @JvmField
     val GEAR = shapeOf(
         "gears",
         4.0,
-        /*model = ModelUtil.createSimple(hiiragiRL("item/gear")),
-        recipes = {
-            mapOf(
-                it.asPart().getId().append("_shaped") to ShapedRecipeJsonBuilder.create(it)
+        model = { itemModelLayered(hiiragiRL("item/gears")) },
+        recipes = { pack, provider ->
+            pack.addRecipeAndAdvancement(
+                hiiragiRL(provider.asPart().getId()).append("_shaped"),
+                ShapedRecipeBuilder.shaped(provider)
                     .pattern(" A ")
-                    .pattern("ABA")
+                    .pattern("A A")
                     .pattern(" A ")
-                    .input('A', it.asPart().setShape(ingotFake).getTagKey(Registry.ITEM_KEY))
-                    .input('B', RMTags.HAMMERS)
-                    .criterionFromMaterial(ingotFake, it.asPart().material)
+                    .define('A', provider.asPart().replace(ingotFake).getItemTag())
+                ::save
             )
-        }*/
+        }
     )
 
     @JvmField
     val GEM = shapeOf(
         "gems",
         1.0,
-        /*model = ModelUtil.createSimple("item/quartz"),
-        recipes = {
-            mapOf(
-                it.asPart().getId().append("_shapeless") to ShapelessRecipeJsonBuilder.create(it, 9)
-                    .input(it.asPart().setShape(BLOCK_GEM).getTagKey(Registry.ITEM_KEY))
-                    .criterionFromMaterial(BLOCK_GEM, it.asPart().material)
-            )
-        }*/
+        model = { itemModelLayered(ResourceLocation("item/quartz")) }
     )
 
     @JvmField
     val INGOT = shapeOf(
         "ingots",
         1.0,
-        /*recipes = {
-            mapOf(
-                it.asPart().getId().append("_shaped") to ShapedRecipeJsonBuilder.create(it)
-                    .get3x3('A')
-                    .input('A', it.asPart().setShape(NUGGET).getTagKey(Registry.ITEM_KEY))
-                    .criterionFromMaterial(NUGGET, it.asPart().material),
-                it.asPart().getId().append("_shapeless") to ShapelessRecipeJsonBuilder.create(it, 9)
-                    .input(it.asPart().setShape(BLOCK_METAL).getTagKey(Registry.ITEM_KEY))
-                    .criterionFromMaterial(BLOCK_METAL, it.asPart().material)
+        recipes = { pack, provider ->
+            pack.addRecipeAndAdvancement(
+                hiiragiRL(provider.asPart().getId()).append("_shaped"),
+                ShapedRecipeBuilder.shaped(provider)
+                    .pattern("AAA")
+                    .pattern("AAA")
+                    .pattern("AAA")
+                    .define('A', provider.asPart().replace(NUGGET).getItemTag())
+                ::save
             )
-        }*/
+        }
     )
 
     @JvmField
     val NUGGET = shapeOf(
         "nuggets",
         0.1,
-        /*model = ModelUtil.createSimple("item/iron_nugget"),
-        recipes = {
-            mapOf(
-                it.asPart().getId().append("_shapeless") to ShapelessRecipeJsonBuilder.create(it, 9)
-                    .input(it.asPart().setShape(ingotFake).getTagKey(Registry.ITEM_KEY))
-                    .criterionFromMaterial(ingotFake, it.asPart().material)
+        model = { itemModelLayered(ResourceLocation("item/iron_nugget")) },
+        recipes = { pack, provider ->
+            pack.addRecipeAndAdvancement(
+                hiiragiRL(provider.asPart().getId()).append("_shapeless"),
+                ShapelessRecipeBuilder.shapeless(provider)
+                    .requires(provider.asPart().replace(ingotFake).getItemTag())
+                ::save
             )
-        }*/
+        }
+
     )
 
     @JvmField
     val PLATE = shapeOf(
         "plates",
         1.0,
-        /*model = ModelUtil.createSimple(hiiragiRL("item/plate")),
-        recipes = {
-            val material = it.asPart().material
-            val base = if (material.isGem()) gemFake else ingotFake
-            mapOf(
-                it.asPart().getId().append("_shapeless") to ShapelessRecipeJsonBuilder.create(it)
-                    .input(it.asPart().setShape(base).getTagKey(Registry.ITEM_KEY))
-                    .input(RMTags.HAMMERS)
-                    .criterionFromMaterial(base, material)
-            )
-        }*/
+        model = { itemModelLayered(hiiragiRL("item/plates")) }
     )
 
     @JvmField
     val ROD = shapeOf(
         "rods",
         0.5,
-        /*model = ModelUtil.createSimple(hiiragiRL("item/rod")),
-        recipes = {
-            val material = it.asPart().material
-            val base = if (material.isGem()) gemFake else ingotFake
-            mapOf(
-                it.asPart().getId().append("_shaped") to ShapedRecipeJsonBuilder.create(it, 4)
-                    .pattern("AB")
-                    .pattern("A ")
-                    .input('A', it.asPart().setShape(base).getTagKey(Registry.ITEM_KEY))
-                    .input('B', RMTags.FILES)
-                    .criterionFromMaterial(base, material)
-            )
-        }*/
+        model = { itemModelLayered(hiiragiRL("item/rods")) }
     )
 
 }
