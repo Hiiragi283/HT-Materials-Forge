@@ -5,7 +5,6 @@ import hiiragi283.material.RagiMaterials
 object ShapeRegistry {
 
     private val REGISTRY: LinkedHashMap<String, HiiragiShape> = linkedMapOf()
-    private var isLocked: Boolean = false
 
     @JvmStatic
     fun getShapes(): Collection<HiiragiShape> = REGISTRY.values
@@ -15,13 +14,6 @@ object ShapeRegistry {
 
     @JvmStatic
     fun registerShape(shape: HiiragiShape) {
-
-        //ロックされている場合はパス
-        if (isLocked) {
-            RagiMaterials.LOGGER.error("ShapeRegistry is already locked!")
-            RagiMaterials.LOGGER.error("Shapes should be registered at \"ragi_materials\" entrypoint")
-            return
-        }
 
         //EMPTYを渡された場合はパス
         if (shape == HiiragiShape.EMPTY) return
@@ -42,22 +34,6 @@ object ShapeRegistry {
 
         //重複しなかった場合のみ登録を行う
         REGISTRY[name] = shape
-    }
-
-    fun init() {
-        REGISTRY.clear()
-        registerShape(HiiragiShapes.DUST)
-        registerShape(HiiragiShapes.DUST_TINY)
-        registerShape(HiiragiShapes.GEAR)
-        registerShape(HiiragiShapes.GEM)
-        registerShape(HiiragiShapes.INGOT)
-        registerShape(HiiragiShapes.NUGGET)
-        registerShape(HiiragiShapes.PLATE)
-        registerShape(HiiragiShapes.ROD)
-    }
-
-    fun lock() {
-        isLocked = true
     }
 
 }

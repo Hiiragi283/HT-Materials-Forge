@@ -19,7 +19,7 @@ import net.minecraft.util.Hand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-abstract class HiiragiTileEntity(val type: TileEntityType<*>) : TileEntity(type) {
+abstract class HiiragiTileEntity(type: TileEntityType<*>) : TileEntity(type) {
 
     open lateinit var inventory: HiiragiItemHandlerWrapper
     open lateinit var tank: HiiragiFluidTankWrapper

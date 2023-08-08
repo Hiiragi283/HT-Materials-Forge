@@ -38,15 +38,4 @@ object MaterialRegistry {
 
     }
 
-    fun init() {
-        MaterialElements.register()
-        RagiMaterials.LOGGER.info("Elemental Materials registered!")
-
-        MaterialCommon.register()
-        RagiMaterials.LOGGER.info("Common Materials registered!")
-
-        //RMResourceHandler.load()
-        RagiMaterials.LOGGER.info("Materials from data packs loaded!")
-    }
-
 }

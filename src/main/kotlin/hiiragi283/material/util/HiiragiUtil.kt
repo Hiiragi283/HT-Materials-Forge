@@ -166,6 +166,8 @@ fun FluidStack.toLocation(addAmount: Boolean): ResourceLocation {
 //ResourceLocationの末尾に付け足す関数
 fun ResourceLocation.append(path: String) = ResourceLocation(this.namespace, this.path + path)
 
+fun ResourceLocation.appendBefore(path: String) = ResourceLocation(this.namespace, path + this.path)
+
 //    Result    //
 
 private val WORLD_CLIENT: ClientWorld? by lazy { Minecraft.getInstance().level }

@@ -7,7 +7,6 @@ import pers.solid.brrp.v1.model.ModelJsonBuilder
 
 object HiiragiShapes {
 
-
     private val dustFake = shapeOf("dusts", 1.0)
     private val ingotFake = shapeOf("ingots", 1.0)
     private val gemFake = shapeOf("gems", 1.0)
@@ -19,9 +18,8 @@ object HiiragiShapes {
         "block_metal",
         9.0,
         blockSettings = AbstractBlock.Properties.copy(Blocks.IRON_BLOCK),
-        model = ModelJsonBuilder().parent(hiiragiRL("block/block_metal")),
-        state = hiiragiRL("block/block_metal"),
-        type = ShapeType.BLOCK
+        model = { ModelJsonBuilder().parent(hiiragiRL("block/block_metal")) },
+        state = hiiragiRL("block/block_metal")
     )
 
     @JvmField
@@ -29,9 +27,8 @@ object HiiragiShapes {
         "block_gem",
         9.0,
         blockSettings = AbstractBlock.Properties.copy(Blocks.GLASS),
-        model = ModelJsonBuilder().parent(hiiragiRL("block/block_gem")),
-        state = hiiragiRL("block/block_gem"),
-        type = ShapeType.BLOCK
+        model = { ModelJsonBuilder().parent(hiiragiRL("block/block_gem")) },
+        state = hiiragiRL("block/block_gem")
     )
 
     @JvmField
@@ -39,9 +36,8 @@ object HiiragiShapes {
         "ore_stone",
         1.0,
         blockSettings = AbstractBlock.Properties.copy(Blocks.STONE),
-        model = ModelJsonBuilder().parent(hiiragiRL("block/ore_stone")),
-        state = hiiragiRL("block/ore_stone"),
-        type = ShapeType.BLOCK
+        model = { ModelJsonBuilder().parent(hiiragiRL("block/ore_stone")) },
+        state = hiiragiRL("block/ore_stone")
     )
 
     @JvmField
@@ -49,9 +45,8 @@ object HiiragiShapes {
         "ore_nether",
         1.0,
         blockSettings = AbstractBlock.Properties.copy(Blocks.NETHERRACK).strength(3.0f, 6.0f).noOcclusion(),
-        model = ModelJsonBuilder().parent(hiiragiRL("block/ore_nether")),
-        state = hiiragiRL("block/ore_nether"),
-        type = ShapeType.BLOCK
+        model = { ModelJsonBuilder().parent(hiiragiRL("block/ore_nether")) },
+        state = hiiragiRL("block/ore_nether")
     )
 
     @JvmField
@@ -59,9 +54,8 @@ object HiiragiShapes {
         "ore_end",
         1.0,
         blockSettings = AbstractBlock.Properties.copy(Blocks.END_STONE).strength(3.0f, 6.0f).noOcclusion(),
-        model = ModelJsonBuilder().parent(hiiragiRL("block/ore_end")),
-        state = hiiragiRL("block/ore_end"),
-        type = ShapeType.BLOCK
+        model = { ModelJsonBuilder().parent(hiiragiRL("block/ore_end")) },
+        state = hiiragiRL("block/ore_end")
     )
 
     //    Items    //

@@ -8,31 +8,21 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.ToolItem
 import net.minecraft.util.IItemProvider
 import net.minecraftforge.common.extensions.IForgeItem
-import net.minecraftforge.fml.RegistryObject
-import net.minecraftforge.registries.DeferredRegister
 import net.minecraftforge.registries.IForgeRegistryEntry
 
 internal interface HiiragiEntry<T : IForgeRegistryEntry<T>> : IItemProvider {
 
-    val registry: DeferredRegister<T>
-
     fun getObject(): T
 
-    fun register(): RegistryObject<T> = registry.register(getObject().registryName!!.path) { getObject() }
+    fun initResourcePack()
 
     interface BLOCK : HiiragiEntry<Block> {
-
-        override val registry: DeferredRegister<Block>
-            get() = RagiMaterials.BLOCKS
 
         override fun getObject(): Block = this as Block
 
     }
 
     interface ITEM : HiiragiEntry<Item> {
-
-        override val registry: DeferredRegister<Item>
-            get() = RagiMaterials.ITEMS
 
         override fun getObject(): Item = this as Item
 
@@ -50,11 +40,32 @@ internal interface HiiragiEntry<T : IForgeRegistryEntry<T>> : IItemProvider {
 
 //    Block    //
 
-abstract class HiiragiBlock(settings: Properties) : Block(settings), HiiragiEntry.BLOCK
+abstract class HiiragiBlock(id: String, settings: Properties) : Block(settings), HiiragiEntry.BLOCK {
+
+    init {
+        setRegistryName(RagiMaterials.MOD_ID, id)
+    }
+
+}
 
 //    Item    //
 
-abstract class HiiragiBlockItem(block: Block, settings: Properties = Properties()) :
-    BlockItem(block, settings), HiiragiEntry.ITEM
+open class HiiragiBlockItem(block: Block, settings: Properties = Properties()) :
+    BlockItem(block, settings), HiiragiEntry.ITEM {
 
-abstract class HiiragiItem(settings: Properties = Properties()) : Item(settings), HiiragiEntry.ITEM
+    init {
+        registryName = block.registryName
+    }
+
+    override fun initResourcePack() {
+    }
+
+}
+
+abstract class HiiragiItem(id: String, settings: Properties = Properties()) : Item(settings), HiiragiEntry.ITEM {
+
+    init {
+        setRegistryName(RagiMaterials.MOD_ID, id)
+    }
+
+}

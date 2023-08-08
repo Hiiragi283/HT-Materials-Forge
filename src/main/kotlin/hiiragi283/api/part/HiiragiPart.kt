@@ -1,12 +1,11 @@
 package hiiragi283.api.part
 
-import hiiragi283.api.item.MaterialItemConvertible
+import hiiragi283.api.PartProvider
 import hiiragi283.api.material.HiiragiMaterial
 import hiiragi283.api.material.MaterialRegistry
 import hiiragi283.api.shape.HiiragiShape
 import hiiragi283.api.shape.ShapeRegistry
 import hiiragi283.material.util.forgeRL
-import hiiragi283.material.util.hiiragiRL
 import net.minecraft.block.Block
 import net.minecraft.client.resources.I18n
 import net.minecraft.entity.Entity
@@ -16,26 +15,22 @@ import net.minecraft.item.ItemStack
 import net.minecraft.tags.BlockTags
 import net.minecraft.tags.FluidTags
 import net.minecraft.tags.ItemTags
-import net.minecraft.util.ResourceLocation
 import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.StringTextComponent
 import net.minecraft.util.text.TranslationTextComponent
 import net.minecraft.world.Explosion
 import net.minecraft.world.World
 import net.minecraftforge.common.Tags
-import pers.solid.brrp.v1.util.RecipeJsonFactory
 import kotlin.math.roundToInt
 
 fun ItemStack.getParts(): List<HiiragiPart> = this.item.tags.map { HiiragiPart.fromPath(it.path) }
 
-data class HiiragiPart(val shape: HiiragiShape, val material: HiiragiMaterial) : PartConvertible {
+data class HiiragiPart(val shape: HiiragiShape, val material: HiiragiMaterial) : PartProvider {
 
     constructor(shape: String, material: String) : this(
         ShapeRegistry.getShape(shape),
         MaterialRegistry.getMaterial(material)
     )
-
-    private val path: String = "${shape.name}/${material.name}"
 
     private val weight: Double =
         if (material.hasMolar() && shape.hasScale()) (material.molar * shape.scale * 10.0).roundToInt() / 10.0 else 0.0
@@ -88,28 +83,26 @@ data class HiiragiPart(val shape: HiiragiShape, val material: HiiragiMaterial) :
 
     fun isValid(): Boolean = shape.isValid(material)
 
-    fun getId(): ResourceLocation = hiiragiRL(path)
-
     fun getName(): String = I18n.get(shape.getTranslationKey(), material.getTranslatedName())
-
-    fun getRecipe(output: MaterialItemConvertible): Map<ResourceLocation, RecipeJsonFactory> = shape.getRecipe(output)
-
-    fun getForgeId(): ResourceLocation = forgeRL(path)
-
-    fun getBlockTag(): Tags.IOptionalNamedTag<Block> = BlockTags.createOptional(getForgeId())
-
-    fun getFluidTag(): Tags.IOptionalNamedTag<Fluid> = FluidTags.createOptional(getForgeId())
-
-    fun getItemTag(): Tags.IOptionalNamedTag<Item> = ItemTags.createOptional(getForgeId())
 
     fun getText(): TranslationTextComponent =
         TranslationTextComponent(shape.getTranslationKey(), material.getTranslatedName())
 
-    fun setMaterial(material: HiiragiMaterial): HiiragiPart = HiiragiPart(shape, material)
+    //    ResourceLocation    //
 
-    fun setShape(shape: HiiragiShape): HiiragiPart = HiiragiPart(shape, material)
+    fun getId(): String = "${shape.name}_${material.name}"
 
-    //    PartConvertible    //
+    fun getForgeId(): String = "${shape.name}/${material.name}"
+
+    //    Tag    //
+
+    fun getBlockTag(): Tags.IOptionalNamedTag<Block> = BlockTags.createOptional(forgeRL(getForgeId()))
+
+    fun getFluidTag(): Tags.IOptionalNamedTag<Fluid> = FluidTags.createOptional(forgeRL(getForgeId()))
+
+    fun getItemTag(): Tags.IOptionalNamedTag<Item> = ItemTags.createOptional(forgeRL(getForgeId()))
+
+    //    PartProvider    //
 
     override fun asPart(): HiiragiPart = this
 
